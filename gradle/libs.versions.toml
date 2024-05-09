@@ -1,22 +1,20 @@
 [versions]
-activity = "1.8.2"
-activityCompose = "1.8.2"
+activity = "1.9.0"
+activityCompose = "1.9.0"
 androidGradle = "8.2.2"
 appcompat = "1.6.1"
-composeBom = "2024.04.00"
+composeBom = "2024.05.00"
 constraintlayout = "2.1.4"
-coreKtx = "1.12.0"
+coreKtx = "1.13.1"
 espressoCore = "3.5.1"
-fragmentKtx = "1.6.2"
-mlkitDocScanner = "16.0.0-beta1"
-coilKT = "2.6.0"
+fragmentKtx = "1.7.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlinAndroidGradle = "1.9.0"
 lifecycleRuntimeKtx = "2.7.0"
-material = "1.11.0"
+material = "1.12.0"
 truth = "1.1.5"
-uiToolingPreview = "1.6.5"
+uiToolingPreview = "1.6.7"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -26,8 +24,6 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-io-coil-kt = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilKT" }
-android-mlkit-document-scanner = { group = "com.google.android.gms", name = "play-services-mlkit-document-scanner", version.ref = "mlkitDocScanner" }
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
