@@ -1,9 +1,9 @@
-package com.example.androidplayground
+package com.example.androidplayground.data
 
 /**
- * SampleData for Jetpack Compose Tutorial 
+ * SampleData for Jetpack Compose Tutorial
  */
-object SampleData {
+object SampleMessagingData {
     // Sample conversation data
     val conversationSample = listOf(
         Message(
@@ -73,3 +73,8 @@ object SampleData {
         ),
     )
 }
+
+/**
+ * Single message entity
+ * */
+data class Message(val author: String, val body: String)
