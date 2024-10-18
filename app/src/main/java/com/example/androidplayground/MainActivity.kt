@@ -3,24 +3,27 @@ package com.example.androidplayground
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
@@ -46,63 +49,35 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingCheenu() {
+fun GreetingCheenu(name: String = "") {
     Column(
         modifier = Modifier
-            .padding(16.dp)
-            .background(Color.Magenta)
-            .size(700.dp, 700.dp),
-//            .fillMaxSize(),
-        horizontalAlignment = Alignment.End,
+            .padding(8.dp)
+            .size(400.dp, 400.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
     ) {
-        Text(
-            text = "Hello Gunda Cheenu!",
-            color = Color.Blue,
-            fontWeight = FontWeight.ExtraBold,
+        Image(
             modifier = Modifier
-                .background(color = Color.Cyan)
-                .padding(8.dp)
-                .background(color = Color.Gray)
-                .padding(8.dp)
-                .clip(CutCornerShape(4.dp))
+                .size(40.dp)
+                .background(color = Color.Cyan),
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            contentDescription = ""
         )
-        Text(
-            text = "Hello Cheenu",
-            color = Color.Blue,
-            fontWeight = FontWeight.ExtraBold,
+        val icon = if (name.isEmpty()) Icons.Filled.Add else Icons.Filled.AccountCircle
+        Icon(
             modifier = Modifier
-                .background(color = Color.Cyan)
-                .padding(8.dp)
-                .background(color = Color.Gray)
-                .padding(8.dp)
-                .clip(CutCornerShape(4.dp))
+                .size(40.dp)
+                .background(color = Color.Cyan),
+            imageVector = icon, contentDescription = ""
         )
-        Box(modifier = Modifier
-            .height(96.dp),
-            contentAlignment = Alignment.TopStart,
-        ) {
-            Text(
-                text = "Hello Cheenu",
-                color = Color.Blue,
-                fontWeight = FontWeight.ExtraBold,
+        for (index in 1 .. 5){
+            Icon(
                 modifier = Modifier
-                    .background(color = Color.Cyan)
-                    .padding(8.dp)
-                    .background(color = Color.Gray)
-                    .padding(8.dp)
-                    .clip(CutCornerShape(4.dp))
-            )
-            Text(
-                text = "Hello Cheenu",
-                color = Color.Blue,
-                fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier
-                    .background(color = Color.Cyan)
-                    .padding(8.dp)
-                    .background(color = Color.Gray)
-                    .padding(8.dp)
-                    .clip(CutCornerShape(4.dp))
+                    .size(40.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(color = Color.Cyan),
+                imageVector = Icons.Rounded.Favorite, contentDescription = ""
             )
         }
     }
@@ -115,7 +90,7 @@ fun GreetingCheenu() {
 fun GreetingPreview() {
     AndroidPlayGroundTheme {
         Surface {
-            GreetingCheenu()
+            GreetingCheenu("Hero")
         }
     }
 }
