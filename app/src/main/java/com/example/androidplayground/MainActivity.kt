@@ -3,22 +3,22 @@ package com.example.androidplayground
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material3.Icon
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
@@ -33,10 +33,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidPlayGroundTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
-                    GreetingCheenu("Cheenu")
+                    StateSample(Modifier.fillMaxSize())
                 }
             }
         }
@@ -44,22 +43,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingCheenu(name: String = "") {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+fun StateSample(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(150) {
-            Icon(
-                modifier = Modifier
-                    .size(56.dp)
-                    .padding(8.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(color = Color.Magenta),
-                imageVector = Icons.Outlined.Favorite, contentDescription = "",
-                tint = Color.LightGray
-            )
+        var count by remember {
+            mutableIntStateOf(0)
+        }
+        Text(text = "Hero hit me $count times", style = MaterialTheme.typography.displaySmall)
+        Button(onClick = { count++ }, modifier = Modifier.padding(8.dp)) {
+            Text(text = "Click me", style = MaterialTheme.typography.titleMedium)
         }
     }
 }
@@ -70,8 +65,6 @@ fun GreetingCheenu(name: String = "") {
 @Composable
 fun GreetingPreview() {
     AndroidPlayGroundTheme {
-        Surface {
-            GreetingCheenu("Hero")
-        }
+        StateSample()
     }
 }
