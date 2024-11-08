@@ -1,4 +1,4 @@
-package com.example.androidplayground.services
+package com.example.androidplayground.components
 
 import android.app.Service
 import android.content.Intent

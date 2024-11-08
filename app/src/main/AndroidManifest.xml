@@ -36,7 +36,7 @@
         </activity>
 
         <service
-            android:name=".services.SampleService"
+            android:name=".components.SampleService"
             android:exported="false" />
     </application>
 

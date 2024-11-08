@@ -1,6 +1,7 @@
 package com.example.androidplayground
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import coil.compose.AsyncImage
+import com.example.androidplayground.components.AirplaneModeReceiver
 import com.example.androidplayground.data.SampleMessagingData
 import com.example.androidplayground.screens.Conversation
 import com.example.androidplayground.ui.theme.AndroidPlayGroundTheme
@@ -28,9 +30,15 @@ import com.example.androidplayground.ui.theme.AndroidPlayGroundTheme
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+    private val receiver = AirplaneModeReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        registerReceiver(
+            receiver,
+            IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        )
 
         setContent {
             AndroidPlayGroundTheme {
@@ -51,27 +59,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-//        lifecycleScope.launch {
-//            delay(2000)
-//            Log.d("Main", "Launching the Youtube")
-//
-////            // Explicit intent to outside app
-////            Intent(Intent.ACTION_MAIN).also {
-////                it.`package` = "com.google.android.youtube"
-////                startActivity(it)
-////            }
-//
-        // Implicit intent, system will decide which app to open
-////            val intent = Intent(Intent.ACTION_SEND).apply {
-////                type = "text/plain"
-////                putExtra(Intent.EXTRA_EMAIL, arrayOf("amanjithayas@gmail.com"))
-////                putExtra(Intent.EXTRA_SUBJECT, "Hero Try")
-////                putExtra(Intent.EXTRA_TEXT, "Trying a small step..")
-////            }
-//
-//            startActivity(intent)
-//        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -84,6 +71,12 @@ class MainActivity : ComponentActivity() {
         }
 
         viewModel.updateUri(uri)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        unregisterReceiver(receiver)
     }
 }
 
