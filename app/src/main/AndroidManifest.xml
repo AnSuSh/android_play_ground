@@ -4,9 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name=".PlaygroundApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -37,6 +39,10 @@
 
         <service
             android:name=".components.SampleService"
+            android:exported="false" />
+
+        <service
+            android:name=".components.RunningService"
             android:exported="false" />
     </application>
 

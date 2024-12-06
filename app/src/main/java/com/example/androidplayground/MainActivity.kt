@@ -2,6 +2,7 @@ package com.example.androidplayground
 
 import android.content.Intent
 import android.content.IntentFilter
+import android.Manifest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.core.app.ActivityCompat
 import coil.compose.AsyncImage
 import com.example.androidplayground.components.AirplaneModeReceiver
+import com.example.androidplayground.components.RunningService
 import com.example.androidplayground.data.SampleMessagingData
 import com.example.androidplayground.screens.Conversation
 import com.example.androidplayground.ui.theme.AndroidPlayGroundTheme
@@ -34,6 +37,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                0
+            )
+        }
 
         registerReceiver(
             receiver,
@@ -52,8 +63,21 @@ class MainActivity : ComponentActivity() {
                         }
                         Button(onClick = {
                             Log.d("Main", "clicked")
+                            Intent(applicationContext, RunningService::class.java).also {
+                                it.action = RunningService.Actions.START.toString()
+                                startService(it)
+                            }
                         }) {
-                            Text(text = "Click me")
+                            Text(text = "Click me to Start")
+                        }
+                        Button(onClick = {
+                            Log.d("Main", "clicked")
+                            Intent(applicationContext, RunningService::class.java).also {
+                                it.action = RunningService.Actions.STOP.toString()
+                                startService(it)
+                            }
+                        }) {
+                            Text(text = "Click me to Stop")
                         }
                     }
                 }
